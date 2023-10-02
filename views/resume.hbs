@@ -1,0 +1,130 @@
+<div class="resume-background container my-5">
+  <div class="text-center">
+    <div class="row row-cols-2">
+      <div class="col-4 col-left">
+        <section class="">
+          <div class="profile">
+            <img src="{{user.image.URL}}" alt="Profile Image" />
+          </div>
+          <header>
+            <div class="contact">
+              <h2>Contact</h2>
+              <div>
+                <p>{{user.email}}</p>
+                <p>{{user.phone}}</p>
+                <p>{{user.address}}</p>
+              </div>
+            </div>
+          </header>
+          <section class="skills">
+            <div class="technical-skills">
+              <h2>Technical Skills</h2>
+              <ul>
+                {{#each user.skills}}
+                  {{#each this.technicalSkills}}
+                    {{!-- <li><icon>⇨</icon> <b>{{@key}}</b>: {{this}}</li> --}}
+                    {{this}},
+                  {{/each}}
+                {{/each}}
+              </ul>
+            </div>
+            <div class="soft-skills">
+              <h2>Soft Skills</h2>
+              <ul>
+                {{#each user.skills}}
+                  {{#each this.softSkills}}
+                    {{!-- <li><icon>⇨</icon> <b>{{@key}}</b>: {{this}}</li> --}}
+                    {{this}},
+                  {{/each}}
+                {{/each}}
+              </ul>
+            </div>
+          </section>
+          <div class="languages">
+            <h2>Languages</h2>
+            <ul>
+              {{#each user.languages}}
+                <li>{{language}} ({{proficiency}})</li>
+              {{/each}}
+            </ul>
+          </div>
+          <div class="references">
+            <h2>References</h2>
+            <ul>
+              {{#each user.references}}
+                <li>{{name}} - {{position}}</li>
+                <li>{{email}}</li>
+                <li>{{phone}}</li>
+              {{/each}}
+            </ul>
+          </div>
+          <div class="certificates">
+            <h2>Certificates</h2>
+            <ul>
+              {{#each user.certificate}}
+                <li><h5>{{title}}</h5></li>
+                <li> - {{description}}</li>
+              {{/each}}
+            </ul>
+          </div>
+
+        </section>
+      </div>
+
+      <div class="col-8">
+        <div class="row row-cols-1">
+          <div class="col col-top py-5">
+            <div class="profile-name">
+              <h1>{{user.name}}</h1>
+            </div>
+            <div class="position">
+              <h3>React.JS Developer</h3>
+            </div>
+          </div>
+
+          <div class="col col-bottom">
+            <section class="">
+              <div class="objective">
+                <h2>Objective</h2>
+                <label>{{user.objective}}</label>
+              </div>
+            </section>
+
+            <section class="education">
+              <h2>Education</h2>
+              <ul>
+                {{#each user.educations}}
+                  <li>
+                    <h3>{{qualification}}</h3>
+                    <p>{{institution}}</p>
+                    <p>{{splitDate startdate}} - {{splitDate enddate}}</p>
+                  </li>
+                {{/each}}
+              </ul>
+            </section>
+
+            <section class="work-experience">
+              <h2>Work Experience</h2>
+              <ul>
+                {{#each user.workExperiences}}
+                  <li>
+                    <h3>{{jobtitle}}</h3>
+                    <p>{{companyname}}</p>
+                    <p>{{splitDate startdate}} - {{splitDate enddate}}</p>
+                    <p>{{description}}</p>
+                    <ul>
+                      {{#each responsibilitie}}
+                        <li>{{this}}</li>
+                      {{/each}}
+                    </ul>
+                  </li>
+                {{/each}}
+              </ul>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
