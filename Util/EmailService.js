@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const sendEmail = async (to, subject, html) => {
+const sendEmail = async (to, subject, html, pdf) => {
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     port: 465,
@@ -22,8 +22,8 @@ const sendEmail = async (to, subject, html) => {
     html: html,
     attachments: [
       {
-        filename: 'attachment.pdf',
-        content: html,
+        filename: 'Resume.pdf',
+        content: pdf,
       },
     ],
   };
