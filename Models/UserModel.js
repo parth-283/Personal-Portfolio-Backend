@@ -62,6 +62,7 @@ const UserSchema = new mongoose.Schema({
     userType: {
         type: String,
         default: "user",
+        enum: ["user", "visitor", "admin"]
     },
     projects: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -133,15 +134,15 @@ UserSchema.methods.generateSigningToken = async function () {
         if (validToken) {
             return validToken.token;
         } else {
-            const token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY, {
-                expiresIn: 0,
+            const token = jwt.sign({ _id: this._id, role: this.userType }, process.env.SECRET_KEY, {
+                expiresIn: '24h',
             });
             this.tokens.push({ token: token, valid: true, });
             await this.save();
             return token;
         }
     } catch (error) {
-        return null;
+        res.status(500).send({ message: "Server Error", Error: error, isSuccess: false, isError: true });
     }
 };
 

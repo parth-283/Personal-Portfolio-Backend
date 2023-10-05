@@ -7,9 +7,9 @@ const hbs = require('handlebars');
 const fs = require('fs');
 const puppeteer = require('puppeteer');
 
-const formater = (item) => {
-    const { resetToken, resetTokenExpiry, tokens, password, __v, ...data } = item._doc
-    return data
+const formatter = (item) => {
+    const { resetToken, resetTokenExpiry, tokens, userType, image, password, __v, ...data } = item._doc
+    return { ...data, image: image.URL }
 }
 
 const Register = async (req, res) => {
@@ -27,7 +27,7 @@ const Register = async (req, res) => {
 
         const Response = await newUser.save()
 
-        res.status(201).send({ Data: formater(Response), isSuccess: true, isError: false });
+        res.status(201).send({ Data: formatter(Response), isSuccess: true, isError: false });
     } catch (error) {
         res.status(500).send({ Message: 'Internal server error...!', Error: error, isSuccess: false, isError: true });
     }
@@ -87,7 +87,7 @@ const GetUserWithAllData = async (req, res) => {
         let user = await User.find().populate('projects').populate('educations').populate('workExperiences').populate('skills').populate('languages').populate('references').populate('certificate');
 
         let response = user.map((item) => {
-            return formater(item)
+            return formatter(item)
         })
 
         if (user.length > 0) {
@@ -105,7 +105,7 @@ const specificUser = async (req, res) => {
         let user = await User.find({ _id: req.params.id }).populate('projects').populate('educations').populate('workExperiences').populate('skills').populate('languages').populate('references').populate('certificate');
 
         let response = user.map((item) => {
-            return formater(item)
+            return formatter(item)
         })
 
         if (user.length > 0) {
@@ -139,7 +139,7 @@ const updateUser = async (req, res) => {
         ).populate('projects').populate('educations').populate('workExperiences').populate('skills').populate('languages').populate('references').populate('certificate');
 
         if (UpdatedData) {
-            res.status(200).send({ Data: formater(UpdatedData), isSuccess: true, isError: false })
+            res.status(200).send({ Data: formatter(UpdatedData), isSuccess: true, isError: false })
         } else {
             res.status(204).send({ Message: 'User not found...!', isSuccess: false, isError: true })
         }

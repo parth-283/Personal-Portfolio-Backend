@@ -53,6 +53,12 @@ app.use("/reference", Reference)
 app.use("/certificate", Certificate)
 app.use("/user", UserRoute)
 
+
+app.get('/getPublicIP', (req, res) => {
+  const clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  res.json({ publicIP: clientIP });
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`This port is listening on http://localhost:${process.env.PORT}`.yellow);
 });

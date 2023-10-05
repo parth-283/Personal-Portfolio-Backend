@@ -37,6 +37,7 @@ const addEducation = async (req, res) => {
 }
 
 const getEducation = async (req, res) => {
+    console.log("Start getEducation.")
     try {
         const education = await Education.find()
 

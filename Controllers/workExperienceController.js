@@ -2,7 +2,7 @@ const { WorkExperience } = require("../Models/workExperienceModel")
 const { User } = require("../Models/UserModel")
 
 
-const addworkExperience = async (req, res) => {
+const addWorkExperience = async (req, res) => {
     try {
         const user = await User.find({ _id: req.body.userID })
         const workExperience = await WorkExperience.find({ companyname: req.body.companyname })
@@ -35,7 +35,7 @@ const addworkExperience = async (req, res) => {
     }
 }
 
-const getworkExperience = async (req, res) => {
+const getWorkExperience = async (req, res) => {
     try {
         const workExperience = await WorkExperience.find()
 
@@ -78,7 +78,7 @@ const updateWorkExperience = async (req, res) => {
     }
 }
 
-const deleteworkExperience = async (req, res) => {
+const deleteWorkExperience = async (req, res) => {
     try {
         const Response = await WorkExperience.deleteOne({ _id: req.params.id })
 
@@ -98,8 +98,8 @@ const deleteworkExperience = async (req, res) => {
 }
 
 module.exports = {
-    addworkExperience,
-    getworkExperience,
+    addWorkExperience,
+    getWorkExperience,
     updateWorkExperience,
-    deleteworkExperience
+    deleteWorkExperience
 }
